@@ -24,7 +24,6 @@ export default function WithSubnavigation() {
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         minH={"100px"}
-        className="px-56"
         borderBottom={1}
         borderStyle={"solid"}
         borderColor={useColorModeValue("gray.200", "gray.900")}

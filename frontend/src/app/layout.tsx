@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/utils/Providers";
+import { Jost } from "next/font/google";
+import { Provider } from "@/components/ui/provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const JostFont = Jost({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-jost",
 });
 
 export const metadata: Metadata = {
@@ -24,11 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Providers>{children}</Providers>
+    <html lang="en" className={`${JostFont.variable}`}>
+      <body className="antialiased">
+        <Provider>{children}</Provider>
       </body>
     </html>
   );
