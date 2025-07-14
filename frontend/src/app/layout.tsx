@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { Jost } from "next/font/google";
-import { Provider } from "@/components/ui/provider";
+import "./globals.css";
 
 const JostFont = Jost({
+  variable: "--font-josh",
   subsets: ["latin"],
-  variable: "--font-jost",
 });
 
 export const metadata: Metadata = {
@@ -19,10 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${JostFont.variable}`}>
-      <body className="antialiased">
-        <Provider>{children}</Provider>
-      </body>
+    <html lang="en">
+      <body className={` ${JostFont.variable}   antialiased`}>{children}</body>
     </html>
   );
 }
