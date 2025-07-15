@@ -4,7 +4,7 @@ import Image from "next/image";
 
 function Navbar() {
   return (
-    <div className="flex justify-between items-center h-[100px] ">
+    <nav className="flex px-56 justify-between border-b border-gray-200 items-center h-[100px] ">
       <Image
         src={
           "https://louris.wpbingosite.com/wp-content/themes/louris/assets/images/logo/logo.svg"
@@ -15,7 +15,7 @@ function Navbar() {
       />
       <RenderNavigation />
       <h4>Search</h4>
-    </div>
+    </nav>
   );
 }
 

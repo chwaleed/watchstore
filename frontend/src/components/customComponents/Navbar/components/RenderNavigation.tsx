@@ -145,7 +145,7 @@ const navigationItems: NavigationItem[] = [
 
 export function RenderNavigation() {
   return (
-    <NavigationMenu className="ml-10" viewport={false}>
+    <NavigationMenu className="ml-10 z-50" viewport={false}>
       <NavigationMenuList>
         {navigationItems.map((item, index) => (
           <NavigationMenuItem key={index}>
