@@ -2,10 +2,16 @@ import AnimatedCard from "@/components/customComponents/AnimatedCard";
 import Image from "next/image";
 import React from "react";
 
+const cardProps = {
+  width: 585,
+  imageLink:
+    "https://louris.wpbingosite.com/wp-content/uploads/2025/04/images.jpg",
+};
+
 function Info() {
   return (
     <div className="flex justify-between">
-      <AnimatedCard width={585} />
+      <AnimatedCard {...cardProps} />
       <div>
         <div>
           <Image
