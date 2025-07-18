@@ -19,4 +19,6 @@ export class UserResponseDto {
 
   @Exclude()
   password: string;
+  @Exclude()
+  refreshTokens: string[];
 }
