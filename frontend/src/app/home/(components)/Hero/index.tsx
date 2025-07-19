@@ -4,7 +4,7 @@ import AnimatedBanners from "./components/AnimatedBanner";
 function Hero() {
   return (
     <>
-      <AnimatedBanners autoPlay={false} />
+      <AnimatedBanners interval={5000} />
     </>
   );
 }

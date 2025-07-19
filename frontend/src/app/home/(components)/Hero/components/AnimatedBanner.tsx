@@ -1,13 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Banner1 from "../../../../../../public/Banner 2.png";
+import Banner2 from "../../../../../../public/Banner 3.png";
+import Banner3 from "../../../../../../public/Watch1.png";
 
 export default function AnimatedBanners({
-  images = [
-    "https://louris.wpbingosite.com/wp-content/uploads/2025/04/banner-5.jpg",
-    "https://louris.wpbingosite.com/wp-content/uploads/2025/04/banner-3.jpg",
-    "https://louris.wpbingosite.com/wp-content/uploads/2025/04/banner-2.jpg",
-  ],
+  images = [Banner1, Banner2, Banner3],
   autoPlay = true,
   interval = 3000,
 }) {
