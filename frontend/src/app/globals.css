@@ -128,3 +128,7 @@
 .p {
   @apply text-lg text-gray-400;
 }
+
+button {
+  cursor: pointer;
+}

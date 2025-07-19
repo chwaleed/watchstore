@@ -1,5 +1,3 @@
-// import AppWrapper from "@/components/customComponents/AppWrapper";
-import Navbar from "@/components/customComponents/Navbar";
 import React from "react";
 import Hero from "./(components)/Hero";
 import AppWrapper from "@/components/customComponents/AppWrapper";
@@ -12,9 +10,7 @@ import Display from "./(components)/Display";
 
 function Home() {
   return (
-    <div className="max-w-screen overflow-hidden ">
-      <Navbar />
-
+    <div>
       <section className="Hero-section">
         <Hero />
       </section>
@@ -25,11 +21,9 @@ function Home() {
         <Hot />
         <Display />
       </AppWrapper>
-      {/* <AppWrapper className="mt-18 mb-20"> */}
       <div className="mb-20 pt-10">
         <Testimonial />
       </div>
-      {/* </AppWrapper> */}
     </div>
   );
 }
