@@ -11,12 +11,8 @@ import { RefreshToken } from './auth/entities/refreshToken.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      password: 'root',
-      username: 'postgres',
+      url: process.env.DATABASE_URL,
       entities: [User, RefreshToken],
-      database: 'skillbazzar',
       synchronize: true,
       logging: true,
     }),
