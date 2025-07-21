@@ -7,7 +7,11 @@ function AppWrapper({
   children: ReactNode | ReactNode[];
   className: string;
 }) {
-  return <section className={`px-56 ${className}`}>{children}</section>;
+  return (
+    <section className={` ${className} max-w-[1400px] px-20 xl:px-0 mx-auto`}>
+      {children}
+    </section>
+  );
 }
 
 export default AppWrapper;

@@ -4,7 +4,7 @@ import WatchProductPage from "./(components)";
 
 function Product() {
   return (
-    <AppWrapper className="max-w-screen overflow-hidden ">
+    <AppWrapper className=" overflow-hidden ">
       <WatchProductPage />
     </AppWrapper>
   );

@@ -1,237 +1,292 @@
 "use client";
 import React, { useState } from "react";
 import {
-  ShoppingCart,
   Heart,
+  Search,
+  User,
+  ShoppingCart,
+  ChevronLeft,
+  ChevronRight,
+  Share2,
+  GitCompare,
+  Minus,
+  Plus,
   Star,
   Truck,
-  Shield,
-  RotateCcw,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Button from "@/components/customComponents/Button";
 
-const WatchProductPage = () => {
-  // Sample watch data
-  const watch = {
-    name: "Classic Heritage Timepiece",
-    price: 599,
-    originalPrice: 799,
-    rating: 4.8,
-    reviews: 124,
-    description:
-      "Crafted with precision and elegance, this timeless watch features a Swiss movement, sapphire crystal glass, and genuine leather strap. Perfect for both formal occasions and everyday wear.",
-    features: [
-      "Swiss Quartz Movement",
-      "Sapphire Crystal Glass",
-      "Genuine Italian Leather Strap",
-      "Water Resistant 50M",
-      "2 Year Warranty",
-    ],
-  };
+const ProductDetailPage = () => {
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [isWishlisted, setIsWishlisted] = useState(false);
 
   // Sample product images
   const productImages = [
-    "https://images.unsplash.com/photo-1523170335258-f5c216dd84a8?w=800&h=800&fit=crop&crop=center",
-    "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800&h=800&fit=crop&crop=center",
-    "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=800&h=800&fit=crop&crop=center",
-    "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=800&h=800&fit=crop&crop=center",
+    "https://louris.wpbingosite.com/wp-content/uploads/2020/12/g-shock-digital-3.jpg",
+    "https://louris.wpbingosite.com/wp-content/uploads/2020/12/g-shock-digital.jpg",
+    "https://louris.wpbingosite.com/wp-content/uploads/2020/12/g-shock-digital-4.jpg",
   ];
 
-  const [selectedImage, setSelectedImage] = useState(0);
-  const [isZoomed, setIsZoomed] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isWishlisted, setIsWishlisted] = useState(false);
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setMousePosition({ x, y });
+  const handleQuantityChange = (action) => {
+    if (action === "increment") {
+      setQuantity((prev) => prev + 1);
+    } else if (action === "decrement" && quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    }
   };
 
-  const handleMouseEnter = () => {
-    setIsZoomed(true);
+  const handleImageSelect = (index) => {
+    setSelectedImage(index);
   };
 
-  const handleMouseLeave = () => {
-    setIsZoomed(false);
+  const handlePrevImage = () => {
+    setSelectedImage((prev) =>
+      prev === 0 ? productImages.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextImage = () => {
+    setSelectedImage((prev) =>
+      prev === productImages.length - 1 ? 0 : prev + 1
+    );
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation breadcrumb */}
-      <div className="container mx-auto px-4 py-4">
-        <nav className="text-sm text-gray-500">
-          <span>Home</span> <span className="mx-2">/</span>
-          <span>Watches</span> <span className="mx-2">/</span>
-          <span className="text-gray-900">{watch.name}</span>
-        </nav>
-      </div>
-
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left Column - Images */}
-          <div className="space-y-6">
-            {/* Main Product Image */}
-            <div className="relative bg-gray-50 rounded-lg overflow-hidden">
-              <div
-                className="relative w-full h-96 lg:h-[500px] cursor-zoom-in overflow-hidden"
-                onMouseMove={handleMouseMove}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Image
-                  width={800}
-                  height={0}
-                  src={
-                    "https://louris.wpbingosite.com/wp-content/uploads/2020/12/fossil-3-hand-sports-3.jpg"
-                  }
-                  alt={watch.name}
-                  className={`w-full h-full object-cover transition-transform duration-300 ease-out ${
-                    isZoomed ? "scale-150" : "scale-100"
-                  }`}
-                  style={
-                    isZoomed
-                      ? {
-                          transformOrigin: `${mousePosition.x}% ${mousePosition.y}%`,
-                        }
-                      : {}
-                  }
-                />
+    <div className="min-h-screen  bg-white">
+      {/* Main Content */}
+      <div className="mt-10">
+        <div className="flex">
+          {/* Left Column - Product Gallery (40%) */}
+          <div className="lg:col-span-3 flex-1">
+            <div className="flex flex-col-reverse lg:flex-row gap-4">
+              {/* Thumbnails */}
+              <div className="flex flex-row lg:flex-col gap-2 lg:w-20">
+                {productImages.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleImageSelect(index)}
+                    className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-colors ${
+                      selectedImage === index
+                        ? "border-black"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                  >
+                    <Image
+                      width={200}
+                      height={200}
+                      src={image}
+                      alt={`Product view ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
               </div>
-            </div>
 
-            {/* Thumbnail Images */}
-            <div className="flex space-x-3 overflow-x-auto pb-2">
-              {productImages.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
-                    selectedImage === index
-                      ? "border-black shadow-lg"
-                      : "border-gray-200 hover:border-gray-300"
-                  }`}
-                >
+              {/* Main Image */}
+              <div className="flex-1 relative">
+                <div className="rounded-lg min-w-[400px] h-[500px] lg:h-[600px] xl:h-[700px] overflow-hidden bg-gray-100">
                   <Image
-                    width={200}
-                    height={200}
-                    src={
-                      "https://louris.wpbingosite.com/wp-content/uploads/2020/12/fossil-3-hand-sports-3.jpg"
-                    }
-                    alt={`${watch.name} view ${index + 1}`}
+                    fill={true}
+                    src={productImages[selectedImage]}
+                    alt="Main product view"
                     className="w-full h-full object-cover"
                   />
-                </button>
-              ))}
+
+                  <button
+                    onClick={handlePrevImage}
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition-colors"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    onClick={handleNextImage}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition-colors"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Right Column - Product Details */}
-          <div className="space-y-6">
-            {/* Product Name & Rating */}
-            <div>
-              <h1 className="text-3xl lg:text-4xl font-light text-gray-900 mb-2">
-                {watch.name}
-              </h1>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < Math.floor(watch.rating)
-                          ? "text-yellow-400 fill-current"
-                          : "text-gray-300"
-                      }`}
-                    />
-                  ))}
-                </div>
-                <span className="text-sm text-gray-600">
-                  {watch.rating} ({watch.reviews} reviews)
-                </span>
+          {/* Right Column - Product Details (60%) */}
+          <div className="mt-8 ml-7 flex-1 lg:mt-0 lg:col-span-3">
+            {/* Title */}
+            <h1 className="h2 mb-3">G-SHOCK DIGITAL</h1>
+
+            {/* Rating */}
+            <div className="flex items-center mb-4">
+              <div className="flex items-center">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                  />
+                ))}
               </div>
+              <span className="ml-2 text-sm text-gray-600">(24 reviews)</span>
             </div>
 
-            {/* Price */}
-            <div className="flex items-baseline space-x-3">
-              <span className="text-3xl font-light text-gray-900">
-                ${watch.price}
+            {/* Pricing */}
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-2xl font-semibold text-gray-900">
+                $80.00
               </span>
-              <span className="text-xl text-gray-400 line-through">
-                ${watch.originalPrice}
+              <span className="text-xl text-gray-500 line-through">
+                $100.00
               </span>
-              <span className="bg-red-100 text-red-800 text-sm px-2 py-1 rounded">
-                Save ${watch.originalPrice - watch.price}
+              <span className="bg-red-500 text-white px-2 py-1 text-sm font-semibold rounded">
+                20% OFF
               </span>
             </div>
 
             {/* Description */}
-            <p className="text-gray-600 leading-relaxed">{watch.description}</p>
-
-            {/* Features */}
-            <div>
-              <h3 className="font-medium text-gray-900 mb-3">Key Features</h3>
-              <ul className="space-y-2">
-                {watch.features.map((feature, index) => (
-                  <li
-                    key={index}
-                    className="flex items-center text-sm text-gray-600"
-                  >
-                    <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mr-3"></div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+            <div className="mb-6">
+              <p className="text-gray-600 leading-relaxed">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur.
+              </p>
             </div>
 
-            {/* Action Buttons */}
-            <div className="space-y-4 pt-6">
+            {/* Quantity and Buttons */}
+            <div className="space-y-4 mb-6">
+              {/* Quantity Selector */}
+              <div className="flex items-center gap-4">
+                <span className="text-sm font-medium text-gray-900">
+                  Quantity:
+                </span>
+                <div className="flex items-center border border-gray-300 ">
+                  <button
+                    onClick={() => handleQuantityChange("decrement")}
+                    className="p-2 hover:bg-gray-50 transition-colors"
+                    disabled={quantity <= 1}
+                  >
+                    <Minus className="h-4 w-4" />
+                  </button>
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={(e) =>
+                      setQuantity(Math.max(1, parseInt(e.target.value) || 1))
+                    }
+                    className="w-12 text-center border-0 focus:ring-0 border-none focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
+                    min="1"
+                  />
+                  <button
+                    onClick={() => handleQuantityChange("increment")}
+                    className="p-2 hover:bg-gray-50 transition-colors"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3">
-                <Button className="flex-1 bg-black text-white hover:bg-gray-800 transition-colors duration-200 h-12 text-base font-medium">
-                  <ShoppingCart className="w-5 h-5 mr-2" />
-                  Add to Cart
+                <Button
+                  varient="primary"
+                  className="flex-1 border-2 !bg-black text-white  !py-4 border-none hover:!bg-gray-900 justify-center "
+                >
+                  ADD TO CART
                 </Button>
                 <Button
-                  variant="outline"
-                  className="flex-1 border-black text-black hover:bg-black hover:text-white transition-colors duration-200 h-12 text-base font-medium"
+                  varient="primary"
+                  className="flex-1 border-2 border-black justify-center"
                 >
-                  Buy Now
+                  BUY NOW
                 </Button>
               </div>
 
-              <Button
-                variant="ghost"
-                onClick={() => setIsWishlisted(!isWishlisted)}
-                className={`w-full transition-colors duration-200 ${
-                  isWishlisted
-                    ? "text-red-600 hover:text-red-700"
-                    : "text-gray-600 hover:text-gray-800"
-                }`}
-              >
-                <Heart
-                  className={`w-5 h-5 mr-2 ${
-                    isWishlisted ? "fill-current" : ""
-                  }`}
-                />
-                {isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
-              </Button>
+              {/* Action Icons */}
+              <div className="flex items-center gap-4 pt-2">
+                <button
+                  onClick={() => setIsWishlisted(!isWishlisted)}
+                  className="flex items-center gap-2 text-sm text-gray-600 hover:text-red-500 transition-colors"
+                >
+                  <Heart
+                    className={`h-4 w-4 ${
+                      isWishlisted ? "fill-red-500 text-red-500" : ""
+                    }`}
+                  />
+                  Wishlist
+                </button>
+                <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  <GitCompare className="h-4 w-4" />
+                  Compare
+                </button>
+                <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  <Share2 className="h-4 w-4" />
+                  Share
+                </button>
+              </div>
             </div>
 
-            {/* Shipping & Returns Info */}
-            <div className="border-t border-gray-200 pt-6 space-y-4">
-              <div className="flex items-center text-sm text-gray-600">
-                <Truck className="w-5 h-5 mr-3 text-gray-400" />
-                <span>Free shipping on orders over $50</span>
+            {/* Payment Methods */}
+            <div className="mb-6">
+              <p className="text-sm text-gray-600 mb-3">
+                Accepted Payment Methods:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <div className="bg-gray-100 px-3 py-1 rounded text-xs font-medium">
+                  Mastercard
+                </div>
+                <div className="bg-gray-100 px-3 py-1 rounded text-xs font-medium">
+                  Apple Pay
+                </div>
+                <div className="bg-gray-100 px-3 py-1 rounded text-xs font-medium">
+                  Visa
+                </div>
+                <div className="bg-gray-100 px-3 py-1 rounded text-xs font-medium">
+                  Amex
+                </div>
+                <div className="bg-gray-100 px-3 py-1 rounded text-xs font-medium">
+                  PayPal
+                </div>
+                <div className="bg-gray-100 px-3 py-1 rounded text-xs font-medium">
+                  Stripe
+                </div>
+                <div className="bg-gray-100 px-3 py-1 rounded text-xs font-medium">
+                  Clearpay
+                </div>
               </div>
-              <div className="flex items-center text-sm text-gray-600">
-                <RotateCcw className="w-5 h-5 mr-3 text-gray-400" />
-                <span>30-day return policy</span>
+            </div>
+
+            {/* Shipping Info */}
+            <div className="border-t border-gray-200 pt-6">
+              <div className="flex items-center gap-3 mb-3">
+                <Truck className="h-5 w-5 text-green-600" />
+                <span className="text-sm font-medium text-gray-900">
+                  Free worldwide shipping on orders over $100
+                </span>
               </div>
-              <div className="flex items-center text-sm text-gray-600">
-                <Shield className="w-5 h-5 mr-3 text-gray-400" />
-                <span>2-year warranty included</span>
+              <div className="text-sm text-gray-600 mb-4">
+                <span className="font-medium">Delivery:</span> 3-7 Working Days
+                <a href="#" className="text-black hover:underline ml-2">
+                  View shipping details
+                </a>
+              </div>
+
+              {/* Product Meta */}
+              <div className="text-sm text-gray-600 space-y-1">
+                <p>
+                  <span className="font-medium">SKU:</span> D2300-S2
+                </p>
+                <p>
+                  <span className="font-medium">Categories:</span>
+                  <a href="#" className="text-black hover:underline ml-1">
+                    Daniel Wellington
+                  </a>
+                  ,
+                  <a href="#" className="text-black hover:underline ml-1">
+                    Maserati
+                  </a>
+                </p>
               </div>
             </div>
           </div>
@@ -241,4 +296,4 @@ const WatchProductPage = () => {
   );
 };
 
-export default WatchProductPage;
+export default ProductDetailPage;
