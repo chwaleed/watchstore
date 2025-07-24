@@ -14,6 +14,12 @@ import { JwtService } from '@nestjs/jwt';
 import { RefreshToken } from './entities/refreshToken.entity';
 import { RefreshTokenDto } from './dto/refreshToken.dto';
 
+export interface tokenPayload {
+  userId: number;
+  role: string;
+  email: string;
+}
+
 @Injectable()
 export class AuthService {
   constructor(
