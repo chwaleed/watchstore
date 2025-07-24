@@ -54,7 +54,7 @@ const ProductDetailPage = () => {
   };
 
   return (
-    <div className="min-h-screen  bg-white">
+    <div className="max-w-[425px]   bg-white">
       {/* Main Content */}
       <div className="mt-10">
         <div className="flex">
