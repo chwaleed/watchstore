@@ -26,7 +26,7 @@ const ProductDetailPage = () => {
     "https://louris.wpbingosite.com/wp-content/uploads/2020/12/g-shock-digital-4.jpg",
   ];
 
-  const handleQuantityChange = (action) => {
+  const handleQuantityChange = (action: string) => {
     if (action === "increment") {
       setQuantity((prev) => prev + 1);
     } else if (action === "decrement" && quantity > 1) {
@@ -34,7 +34,7 @@ const ProductDetailPage = () => {
     }
   };
 
-  const handleImageSelect = (index) => {
+  const handleImageSelect = (index: number) => {
     setSelectedImage(index);
   };
 

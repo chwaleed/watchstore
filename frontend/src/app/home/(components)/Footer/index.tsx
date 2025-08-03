@@ -20,7 +20,7 @@ export default function Footer() {
                     href="#"
                     className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
                   >
-                    Men's Watches
+                    Men&#39;s Watches
                   </a>
                 </li>
                 <li>
@@ -28,7 +28,7 @@ export default function Footer() {
                     href="#"
                     className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
                   >
-                    Women's Watches
+                    Women&#39;s Watches
                   </a>
                 </li>
                 <li>

@@ -5,7 +5,6 @@ import CheckoutForm from "@/app/checkout/(components)/CheckoutForm";
 import PaymentForm from "@/app/checkout/(components)/PaymentForm";
 import OrderSummary from "@/app/checkout/(components)/OrderSummary";
 import OrderItemsList from "@/app/checkout/(components)/OrderItemsList";
-import OrderConfirmed from "@/app/checkout/(components)/OrderConfirmed";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -47,6 +46,8 @@ export default function CheckoutPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [shippingData, setShippingData] = useState<ShippingData | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+
+  console.log(shippingData);
 
   const orderItems = [
     {
@@ -119,9 +120,9 @@ export default function CheckoutPage() {
     }
   };
 
-  const handleUpdateQuantity = (id: string, quantity: number) => {};
+  const handleUpdateQuantity = () => {};
 
-  const handleRemoveItem = (id: string) => {};
+  const handleRemoveItem = () => {};
 
   const calculateTotals = () => {
     const subtotal = 100.0;

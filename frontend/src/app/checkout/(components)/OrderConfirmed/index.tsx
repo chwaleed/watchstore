@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 
-function OrderConfirmed({ shippingData }) {
+function OrderConfirmed() {
   return (
     <div className="lg:col-span-2">
       <div className="bg-white p-8 rounded-lg shadow-sm border">
@@ -32,12 +32,8 @@ function OrderConfirmed({ shippingData }) {
           <div className="bg-gray-50 p-4 rounded-lg text-left mb-6">
             <h3 className="font-medium mb-2">Order Details:</h3>
             <p className="text-sm text-gray-600">Order #: #12345</p>
-            <p className="text-sm text-gray-600">
-              Email confirmation sent to: {shippingData?.email}
-            </p>
-            <p className="text-sm text-gray-600">
-              Shipping to: {shippingData?.firstName} {shippingData?.lastName}
-            </p>
+            <p className="text-sm text-gray-600">Email confirmation sent to:</p>
+            <p className="text-sm text-gray-600">Shipping to:</p>
           </div>
 
           <div className="space-y-3">
