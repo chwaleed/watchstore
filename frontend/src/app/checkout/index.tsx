@@ -202,9 +202,7 @@ export default function CheckoutPage() {
             )}
 
             {currentStep === 1 && (
-              <div className="mt-6">
-                <CheckoutForm onSubmit={handleShippingSubmit} />
-              </div>
+              <CheckoutForm onSubmit={handleShippingSubmit} />
             )}
             {currentStep === 2 && (
               <PaymentForm

@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Jost } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/customComponents/Navbar";
-import Footer from "./home/(components)/Fotter";
-import AppWrapper from "@/components/customComponents/AppWrapper";
+import Footer from "./home/(components)/Footer";
 
 const JostFont = Jost({
   variable: "--font-josh",
@@ -23,40 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` ${JostFont.variable}   antialiased max-w-screen    overflow-x-hidden `}
+        className={` ${JostFont.variable}   bg-gray-50  antialiased max-w-screen    overflow-x-hidden `}
       >
         <Navbar />
-        <main>{children}</main>
-        <AppWrapper className="">
-          <Footer />
-        </AppWrapper>
-        <div className="  px-56 broder-t border-gray-100  mt-20 border-2 border-b-0 py-4">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-gray-600 text-sm">
-              © 2025 TimeZone Watches. All rights reserved.
-            </p>
-            <div className="flex space-x-6">
-              <a
-                href="#"
-                className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
-              >
-                Terms of Service
-              </a>
-              <a
-                href="#"
-                className="text-gray-600 hover:text-gray-900 transition-colors text-sm"
-              >
-                Cookie Policy
-              </a>
-            </div>
-          </div>
-        </div>
+        <main className="min-h-[50vh]">{children}</main>
+        <Footer />
       </body>
     </html>
   );

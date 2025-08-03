@@ -149,7 +149,9 @@ export function RenderNavigation() {
       <NavigationMenuList>
         {navigationItems.map((item, index) => (
           <NavigationMenuItem key={index}>
-            <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="bg-gray-50">
+              {item.title}
+            </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="flex px-2 pb-4 w-[max-content] gap-10">
                 {Object.entries(item.children).map(([groupTitle, links]) => (
